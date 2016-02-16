@@ -2,10 +2,11 @@
     'use strict';
 
     angular.module('questionary-user-app')
-    	   .config(uiRouterConfig)
-    	   .run(runConfig);
+    	   .config(UiRouterConfig)
+    	   .run(RunConfig);
     
-    function uiRouterConfig($stateProvider, $urlRouterProvider) {
+    UiRouterConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+    function UiRouterConfig($stateProvider, $urlRouterProvider) {
 
     	$urlRouterProvider.otherwise('/home');
     
@@ -22,7 +23,8 @@
 			})
     }
 
-	function runConfig($rootScope, $state, User) {
+    RunConfig.$inject = ['$rootScope', '$state', 'User'];
+	function RunConfig($rootScope, $state, User) {
 		$rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams) {
 			var isAuthenticationRequired =  toState.data && toState.data.requiresLogin && !User.isLoggedIn;
 			if(isAuthenticationRequired) {
