@@ -8,6 +8,5 @@
 		var $password;
 		var $active;
 		var $creation_date;
-
 	} 
 ?>
