@@ -53,7 +53,7 @@ require_once("Rest.inc.php");
         
         private function isUserLogged() {
             $response = new stdClass();
-            $response->isUserLogged = true;
+            $response->isUserLogged = false;
             $this->response(json_encode($response),200);
         }
         

@@ -13,7 +13,7 @@
 				UserService.isUserLogged().then(function(isUserLogged){
 					if (!isUserLogged) {
 						event.preventDefault();
-						$state.go('login');
+						$state.go('unlogged.login');
 					}
 				})
 			}

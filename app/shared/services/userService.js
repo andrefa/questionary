@@ -12,12 +12,6 @@
 					return response.data.isUserLogged;
 				});
 				return promise;
-			}, 
-			logUser: function(login, password) {
-				var promise = $http.get('rest/login',{login : login, password : password}).then(function (response) {
-					return response.data;
-				});
-				return promise;
 			}
 		};
   		return userService;

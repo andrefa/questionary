@@ -72,7 +72,27 @@
                         controllerAs : 'loginCtrl',
                         templateUrl: 'app/components/login/login.html'
                     }
+                },
+                resolve : {
+                    authenticated: ['$q', 'UserService', '$state', function ($q, UserService, $state) {
+                        var deferred = $q.defer();
+                        UserService.isUserLogged().then(function (loggedIn) {
+                            if (loggedIn) {
+                                $state.go('logged.dashboard');
+                                deferred.reject();
+                            } else {
+                                deferred.resolve();
+                            }
+                        });
+
+                        return deferred.promise;
+                    }]
                 }
-            })
+
+
+
+
+
+            });
 	}
 })();
