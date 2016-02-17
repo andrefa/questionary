@@ -8,7 +8,7 @@
     function UserService($http) {
 		var userService = {
 			isUserLogged: function() {
-				var promise = $http.get('rest/isUserLogged').then(function (response) {
+				var promise = $http.get('rest/user/isUserLogged').then(function (response) {
 					return response.data.isUserLogged;
 				});
 				return promise;

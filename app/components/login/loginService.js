@@ -10,7 +10,7 @@
 			logUser: function(login, password) {
 				var def = $q.defer();
 
-				$http.post('rest/login',{login : login, password : password}).success(function(data) {
+				$http.post('rest/user/login',{login : login, password : password}).success(function(data) {
                     def.resolve(data);
                 }).error(function(response) {
                     def.reject(response);
