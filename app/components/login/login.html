@@ -1,0 +1,30 @@
+<div class="container">
+    <div class="row">
+		<div class="col-md-4 col-md-offset-4">
+
+			<uib-alert ng-repeat="alert in loginCtrl.alerts" type="{{alert.type}}" close="vm.closeAlert($index)" template-url="app/shared/partials/alert.html">{{alert.msg}}</uib-alert>
+    		
+    		<div class="panel panel-default">
+	
+				<div class="panel-heading">
+			    	<h3 class="panel-title">Efetue o login</h3>
+			 	</div>
+
+			  	<div class="panel-body">
+			    	<form accept-charset="UTF-8" role="form" name="loginForm" no-validate>
+	                    <fieldset>
+				    	  	<div class="form-group">
+				    		    <input class="form-control" placeholder="Login" name="login" type="text" ng-model="loginCtrl.login" required>
+				    		</div>
+				    		<div class="form-group">
+				    			<input class="form-control" placeholder="Senha" name="password" type="password" ng-model="loginCtrl.password" required>
+				    		</div>
+				    		<input class="btn btn-lg btn-success btn-block" type="submit" value="Entrar" ng-click="loginCtrl.doLogin()" ng-disabled="loginForm.$invalid">
+				    	</fieldset>
+			      	</form>
+			    </div>
+
+			</div>
+		</div>
+	</div>
+</div>
