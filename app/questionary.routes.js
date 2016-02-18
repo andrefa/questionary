@@ -29,23 +29,29 @@
     			url : '/dashboard',
     			views : {
                     'content@logged': {
-                        template: '<h1>content do dashboard</h1>'
+                        controller : 'DashboardController',
+                        controllerAs : 'dashboardCtrl',
+                        templateUrl: 'app/components/dashboard/dashboard.html'
                     }
     			}
     		})
     		.state('logged.questionary',{
-    			url : '/questionary/:userQuestionaryId',
+    			url : '/questionary/{userQuestionaryId:int}',
     			views : {
                     'content@logged': {
-                        template: 'content do questionary'
+                        controller : 'QuestionaryController',
+                        controllerAs : 'questionaryCtrl',
+                        templateUrl: 'app/components/questionary/questionary.html'
                     }
                 }
     		})
     		.state('logged.result',{
-    			url : '/result/:userQuestionaryId',
+    			url : '/result/{userQuestionaryId:int}',
     			views : {
                     'content@logged': {
-                        template: 'content do result'
+                        controller : 'ResultController',
+                        controllerAs : 'resultCtrl',
+                        templateUrl: 'app/components/result/result.html'
                     }
     			}
     		})

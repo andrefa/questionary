@@ -4,8 +4,8 @@
 	angular.module('questionary-user-app')
 		   .controller('QuestionaryController', QuestionaryController);
 
-	QuestionaryController.$inject = ['$interval', '$state', '$stateParams', 'QuestionaryService'];
-	function QuestionaryController($interval, $state, $stateParams, QuestionaryService) {
+	QuestionaryController.$inject = ['$scope', '$interval', '$state', '$stateParams', 'QuestionaryService'];
+	function QuestionaryController($scope, $interval, $state, $stateParams, QuestionaryService) {
 		
 		var vm = this;
 		var updateMillisecondsDelay = 1000;
