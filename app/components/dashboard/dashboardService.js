@@ -4,7 +4,7 @@
     angular.module('questionary-user-app')
     	   .factory('DashboardService', DashboardService);
     
-    LoginService.$inject = ['$http', '$q'];
+    DashboardService.$inject = ['$http', '$q'];
     function DashboardService($http, $q) {
 		var dashboardService = {
             listAvailableQuestionaries : listAvailableQuestionaries,
