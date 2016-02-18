@@ -11,10 +11,13 @@
 		vm.alerts = [];
 
 		vm.doLogin = function() {
-			LoginService.logUser(vm.login, vm.password).then(function() {
-				$state.go('logged.dashboard');
-			}, function(){
-				vm.alerts.push({ type: 'danger', msg: 'Oops..! Login ou senha inválidos.'});
+			vm.alerts = [];
+			LoginService.logUser(vm.login, vm.password).then(function(loginSuccess) {
+				if (loginSuccess) {
+					$state.go('logged.dashboard');
+				} else {
+					vm.alerts.push({ type: 'danger', msg: 'Oops..! Login ou senha inválidos.'});
+				}
 			});
 		}
 		

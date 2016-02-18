@@ -4,7 +4,7 @@ ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
-require_once("Rest.inc.php");
+require_once("../shared/Rest.inc.php");
 
     class API extends REST {
 
@@ -53,20 +53,20 @@ require_once("Rest.inc.php");
         
         private function isUserLogged() {
             $response = new stdClass();
-            $response->isUserLogged = false;
+            $response->isUserLogged = true;
             $this->response(json_encode($response),200);
         }
-        
-        private function insertCustomer() {
-            $this->response($this->json("{teste:2}"));
+
+        private function listAvailableQuestionaries() {
+            $response = new stdClass();
+            $response->isUserLogged = true;
+            $this->response(json($response),200);
         }
-        
-        private function updateCustomer() {
-            $this->response($this->json("{teste:3}"));
-        }
-        
-        private function deleteCustomer() {
-            $this->response($this->json("{teste:4}"));
+
+        private function listExecutedQuestionaries() {
+            $response = new stdClass();
+            $response->isUserLogged = true;
+            $this->response(json($response),200);
         }
         
     }

@@ -1,6 +1,6 @@
 <?php
 	include_once("../model/User.php");
-	include_once("../util/Database.php");
+	include_once("../shared/Database.php");
 
 	class UserDao {
 
@@ -10,19 +10,36 @@
 			$this->database = new Database();
 		}
 
-		function select($id) { // usar flag active no login
-			$sql =  "SELECT * FROM user WHERE user_id = $id;";
+		public function findByLoginData($loginData) {
+			$sql =  " SELECT user_id, full_name FROM user WHERE login = '$loginData->login' and password = '$loginData->password' and active = 1 ";
 			$result =  $this->database->query($sql);
 			$result = $this->database->result;
 			$row = mysql_fetch_object($result);
 
-			$this->user_id = $row->user_id;
-			$this->full_name = $row->full_name;
-			$this->email = $row->email;
-			$this->login = $row->login;
-			$this->password = $row->password;
-			$this->active = $row->active;
-			$this->creation_date = $row->creation_date;
+			if ($row) {
+				$user = new stdClass();
+				$user->userId = $row->user_id;
+				$user->fullName = $row->full_name;
+
+				return $user;
+			}
+			return null;
+		}
+
+		public function findById($id) {
+			$sql =  " SELECT user_id, full_name FROM user WHERE user_id = $id ";
+			$result =  $this->database->query($sql);
+			$result = $this->database->result;
+			$row = mysql_fetch_object($result);
+
+			if ($row) {
+				$user = new stdClass();
+				$user->userId = $row->user_id;
+				$user->fullName = $row->full_name;
+
+				return $user;
+			}
+			return null;
 		}
 
 		function delete($id) {

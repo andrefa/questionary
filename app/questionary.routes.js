@@ -7,7 +7,7 @@
 	UiRouterConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 	function UiRouterConfig($stateProvider, $urlRouterProvider) {
 
-		$urlRouterProvider.otherwise('login');
+		$urlRouterProvider.otherwise('logged.dashboard');
 	
 		$stateProvider
 			.state('logged',{
@@ -34,7 +34,7 @@
     			}
     		})
     		.state('logged.questionary',{
-    			url : '/questionary',
+    			url : '/questionary/:userQuestionaryId',
     			views : {
                     'content@logged': {
                         template: 'content do questionary'
@@ -42,7 +42,7 @@
                 }
     		})
     		.state('logged.result',{
-    			url : '/result',
+    			url : '/result/:userQuestionaryId',
     			views : {
                     'content@logged': {
                         template: 'content do result'
@@ -72,7 +72,7 @@
                         controllerAs : 'loginCtrl',
                         templateUrl: 'app/components/login/login.html'
                     }
-                },
+                }/*,
                 resolve : {
                     authenticated: ['$q', 'UserService', '$state', function ($q, UserService, $state) {
                         var deferred = $q.defer();
@@ -87,7 +87,7 @@
 
                         return deferred.promise;
                     }]
-                }
+                }*/
 
 
 

@@ -1,4 +1,5 @@
 <?php
+
 	class Database {
 	 
 		var $host;
@@ -12,9 +13,11 @@
 		 
 		function Database() {
 			$this->host = "localhost";
+			//$this->password = "sistemadequestionariosesimuladosparaogajbr";
 			$this->password = "";
+			//$this->user = "admin_questionary_user";
 			$this->user = "root";
-			$this->database = "mydb";
+			$this->database = "questionary";
 			$this->rows = 0;
 		}
 		 
@@ -36,7 +39,7 @@
 			$this->query = $query;
 			$this->result = mysql_query($query,$this->link) or die (print "Class Database: Error while executing Query");
 			 
-			if(ereg("SELECT",$query)){
+			if(preg_match("/SELECT/",$query)){
 				$this->rows = mysql_num_rows($this->result);
 			}
 			 

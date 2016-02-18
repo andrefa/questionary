@@ -7,14 +7,17 @@
     UserService.$inject = ['$http'];
     function UserService($http) {
 		var userService = {
-			isUserLogged: function() {
-				var promise = $http.get('rest/user/isUserLogged').then(function (response) {
-					return response.data.isUserLogged;
-				});
-				return promise;
-			}
+			isUserLogged: isUserLogged
 		};
+
   		return userService;
+
+  		function isUserLogged() {
+			var promise = $http.get('rest/user/isUserLogged').then(function (response) {
+				return response.data.isUserLogged;
+			});
+			return promise;
+		}
 	}
 
 })();
