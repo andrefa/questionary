@@ -23,9 +23,11 @@ require_once("../dao/UserDao.php");
         public function getLoggedUserId($userSessionToken) {
             $loggedUserId = null;
 
-            if ($userSessionToken != null) {
+            if ($userSessionToken) {
                 $token = $this->hex2str($userSessionToken);
-                $loggedUserId = explode("#", $token)[1];
+
+                $explodedToken = explode("#", $token);
+                $loggedUserId = $explodedToken[1];
 
                 $foundUser = $this->userDao->findById($loggedUserId);
                 if ($foundUser) {
