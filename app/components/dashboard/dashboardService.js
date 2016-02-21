@@ -41,7 +41,7 @@
         function createUserQuestionary(questionaryId) {
             var def = $q.defer();
 
-            $http.post('rest/dashboard/listExecutionHistory', {questionaryId : questionaryId}).success(function(data) {
+            $http.post('rest/dashboard/createUserQuestionary', {questionaryId : questionaryId}).success(function(data) {
                 def.resolve(data);
             }).error(function(response) {
                 def.reject(response);

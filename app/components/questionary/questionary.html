@@ -1,1 +1,26 @@
-questionary
+<div class="row">
+	<div class="col-md-8"><h1>{{questionaryCtrl.userQuestionary.questionaryName}}</h1></div>
+	<div class="col-md-4"><h3>{{questionaryCtrl.userQuestionary.secondsSpent | secondsToFormattedHour}}</h3></div>
+</div>
+
+<div ng-repeat="question in questionaryCtrl.userQuestionary.questions">
+	<div class="row" >
+		<p>{{$index+1}} - {{question.questionDescription}}</p>
+	</div>
+	<div class="row" ng-repeat="option in question.questionOptions">
+		<label>
+			<input type="radio" name="{{ 'radio' + question.questionId}}" ng-value="option.questionOptionId" ng-model="question.answeredQuestionOptionId"> {{option.questionOptionDescription}}
+		</label>
+	</div>
+	<div class="row">
+		<small><a ng-click="question.answeredQuestionOptionId = null">Limpar</a></small>
+	</div>
+</div>
+
+<div class="row">
+	<button type="button" class="btn btn-success" ng-click="questionaryCtrl.saveAndContinue()">Salvar e concluir!</button>
+	<button type="button" class="btn btn-info" ng-click="questionaryCtrl.saveAndExit()">Salvar e sair</button>
+	<a ui-sref="logged.dashboard">
+		<button type="button" class="btn btn-danger">Cancelar</button>
+	</a>
+</div>

@@ -3,11 +3,11 @@ RewriteEngine On
  
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-s
-RewriteRule ^(.*)$ RestApi.php?x=$1 [QSA,NC,L]
+RewriteRule ^(.*)$ QuestionaryController.php?x=$1 [QSA,NC,L]
  
 RewriteCond %{REQUEST_FILENAME} -d
-RewriteRule ^(.*)$ RestApi.php [QSA,NC,L]
+RewriteRule ^(.*)$ QuestionaryController.php [QSA,NC,L]
  
 RewriteCond %{REQUEST_FILENAME} -s
-RewriteRule ^(.*)$ RestApi.php [QSA,NC,L]
+RewriteRule ^(.*)$ QuestionaryController.php [QSA,NC,L]
 </IfModule>

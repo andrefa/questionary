@@ -36,16 +36,6 @@ error_reporting(E_ALL);
 			return $_SERVER['REQUEST_METHOD'];
 		}
 
-		public function hex2str( $hex ) {
-			$tmp = pack('H*', $hex);
-			return $tmp;
-		}
-
-		public function str2hex( $str ) {
-			$tmp = unpack('H*', $str);
-			return array_shift( $tmp );
-		}
-
 		private function inputs() {
 			switch ( $this->get_request_method() ) {
 			case "POST":
@@ -132,6 +122,13 @@ error_reporting(E_ALL);
 			return ( $status[$this->_code] ) ? $status[$this->_code] : $status[500];
 		}
 
+		public function getUserSessionToken() {
+			if (isset($_COOKIE["us"])) {
+                return $_COOKIE["us"];
+            }
+            
+            return null;
+		}
 	}
 	
 ?>

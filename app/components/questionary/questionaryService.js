@@ -9,7 +9,8 @@
 		var questionaryService = {
             findUserQuestionary : findUserQuestionary,
 			updateTimeSpent: updateTimeSpent,
-            saveUserQuestionary : saveUserQuestionary
+            saveAndCalculateScore : saveAndCalculateScore,
+            save : save
 		};
 
   		return questionaryService;
@@ -31,10 +32,22 @@
                                                            secondsSpent : secondsSpent});
         }
 
-        function saveUserQuestionary(userQuestionary) {
+        function saveAndCalculateScore(userQuestionary) {
             var def = $q.defer();
 
-            $http.post('rest/questionary/saveUserQuestionary', userQuestionary).success(function(data) {
+            $http.post('rest/questionary/saveAndCalculateScore', userQuestionary).success(function(data) {
+                def.resolve(data);
+            }).error(function(response) {
+                def.reject(response);
+            });
+
+            return def.promise;
+        }
+
+        function save(userQuestionary) {
+            var def = $q.defer();
+
+            $http.post('rest/questionary/save', userQuestionary).success(function(data) {
                 def.resolve(data);
             }).error(function(response) {
                 def.reject(response);

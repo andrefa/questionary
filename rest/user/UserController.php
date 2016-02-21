@@ -5,14 +5,13 @@ ini_set("display_startup_errors", 1);
 error_reporting(E_ALL);
 
 require_once("../shared/Rest.inc.php");
-require_once("../dao/UserDao.php");
+require_once("../service/UserService.php");
 
     class API extends REST {
 
         public function __construct() {
             parent::__construct(); 
-            $this->password_key_constant = "andrealmeidaceodacodemokey";
-            $this->cookie_key_constant = "informacaodocoookie#";
+            $this->userService = new UserService();
         }
 
         public function processApi() {
@@ -24,16 +23,12 @@ require_once("../dao/UserDao.php");
         }
         
         private function login() {
-            $userDao = new UserDao();
-
             $loginData = json_decode(file_get_contents("php://input"));
-            $loginData->password = md5($loginData->password . $this->password_key_constant);
-
-            $foundUser = $userDao->findByLoginData($loginData);
+            $foundUser = $this->userService->logUser($loginData);
 
             $isUserLogged = $foundUser != null;
             if ($isUserLogged) {
-                setcookie("us", $this->str2hex($this->cookie_key_constant . $foundUser->userId), 2592000000, "/");
+                setcookie("us", $this->userService->encodeUserId($foundUser->userId), 2592000000, "/");
             }
 
             $response = new stdClass();
@@ -42,19 +37,7 @@ require_once("../dao/UserDao.php");
         }
         
         private function isUserLogged() {
-            $isUserLogged = false;
-
-            if (isset($_COOKIE["us"])) {
-                $userDao = new UserDao();
-                $us = $_COOKIE["us"];
-                $token = $this->hex2str($us);
-                $usid = explode("#", $token)[1];
-
-                $foundUser = $userDao->findById($usid);
-                if ($foundUser) {
-                    $isUserLogged = true;
-                }
-            }
+            $isUserLogged = $this->userService->isUserLogged($this->getUserSessionToken());
 
             $response = new stdClass();
             $response->isUserLogged = $isUserLogged;

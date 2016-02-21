@@ -14,10 +14,12 @@
 				abstract : true,
 				views : {
                     'main@': {
-                        templateUrl: 'app/shared/logged/template.html'
+                        templateUrl: 'app/shared/logged/loggedTemplate.html',
+                        controller : 'LoggedHeaderController',
+                        controllerAs : 'loggedHeaderCtrl',
                     },
     				'header@logged': {
-    					templateUrl: 'app/shared/logged/header.html'
+    					templateUrl: 'app/shared/logged/loggedHeader.html'
     				},
 					'footer@logged': {
 						templateUrl: 'app/shared/partials/footer.html'
@@ -60,10 +62,7 @@
                 abstract : true,
                 views : {
                     'main@': {
-                        templateUrl: 'app/shared/unlogged/template.html'
-                    },
-                    'header@unlogged': {
-                        templateUrl: 'app/shared/unlogged/header.html'
+                        templateUrl: 'app/shared/unlogged/unloggedTemplate.html'
                     },
                     'footer@unlogged': {
                         templateUrl: 'app/shared/partials/footer.html'
@@ -80,25 +79,25 @@
                     }
                 },
                 resolve : {
-                    authenticated: ['$q', 'UserService', '$state', function ($q, UserService, $state) {
-                        var deferred = $q.defer();
-                        UserService.isUserLogged().then(function (loggedIn) {
-                            if (loggedIn) {
-                                $state.go('logged.dashboard');
-                                deferred.reject();
-                            } else {
-                                deferred.resolve();
-                            }
-                        });
-
-                        return deferred.promise;
-                    }]
+                    authenticated: redirToLoggedArea
                 }
 
-
-
-
-
             });
+
+        redirToLoggedArea.$inject = ['$q', 'UserService', '$state']
+        function redirToLoggedArea($q, UserService, $state) {
+            var deferred = $q.defer();
+            UserService.isUserLogged().then(function (loggedIn) {
+                if (loggedIn) {
+                    $state.go('logged.dashboard');
+                    deferred.reject();
+                } else {
+                    deferred.resolve();
+                }
+            });
+
+            return deferred.promise;
+        }
+
 	}
 })();

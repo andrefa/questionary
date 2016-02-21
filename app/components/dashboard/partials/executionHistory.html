@@ -1,0 +1,36 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading">Histórico de execuções</div>
+
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Simulado</th>
+				<th>Questões</th>
+				<th>Resultado</th>
+				<th>Tempo gasto</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="execution in dashboardCtrl.executionHistory">
+				<td>{{execution.userQuestionaryId}}</td>
+				<td>{{execution.questionaryName}}</td>
+				<td>{{execution.questionCount}}</td>
+				<td>{{execution.score}}</td>
+				<td>{{execution.secondsSpent | secondsToFormattedHour}}</td>
+				<td ng-if="execution.finished">
+					<a ui-sref="logged.result({userQuestionaryId: execution.userQuestionaryId})">
+						<button type="button" class="btn btn-success">Ver resultados!</button>
+					</a>
+				</td>
+				<td ng-if="!execution.finished">
+					<a ui-sref="logged.questionary({userQuestionaryId: execution.userQuestionaryId})">
+						<button type="button" class="btn btn-info">Continuar!</button>
+					</a>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>

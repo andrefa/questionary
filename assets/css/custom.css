@@ -1,5 +1,9 @@
 body {
-	padding-top:20px;
+	padding-top:70px;
+}
+
+.fullscreen {
+	width: 100%;
 }
 
 .ng-touched .ng-invalid-required {

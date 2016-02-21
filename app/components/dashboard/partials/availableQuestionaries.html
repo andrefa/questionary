@@ -1,0 +1,23 @@
+<div class="panel panel-default">
+
+  <div class="panel-heading">Simulados disponíveis</div>
+
+	<table class="table table-responsive">
+		<thead>
+			<tr>
+				<th>#</th>
+				<th>Simulado</th>
+				<th>Questões</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="questionary in dashboardCtrl.availableQuestionaries">
+				<td>{{questionary.questionaryId}}</td>
+				<td>{{questionary.questionaryName}}</td>
+				<td>{{questionary.questionCount}}</td>
+				<td><button type="button" class="btn btn-info" ng-click="dashboardCtrl.createUserQuestionary(questionary.questionaryId)">Iniciar simulado!</button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>

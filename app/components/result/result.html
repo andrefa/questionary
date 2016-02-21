@@ -1,1 +1,39 @@
-result
+<div class="row">
+	<div class="col-md-8"><h1>Resultados - {{resultCtrl.userQuestionaryResult.questionaryName}}</h1></div>
+	<div class="col-md-4"><h3>{{resultCtrl.userQuestionaryResult.secondsSpent | secondsToFormattedHour}}</h3></div>
+</div>
+
+<div class="row">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Questão</th>
+				<th>Resposta correta</th>
+				<th>Sua resposta</th>
+				<th>Pontuação</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="question in resultCtrl.userQuestionaryResult.questions">
+				<td>{{$index+1}}</td>
+				<td>{{question.correctOption}}</td>
+				<td>{{question.userOption ? question.userOption : 'Em branco'}}</td>
+				<td>{{question.score}}</td>
+				<td>
+					<button type="button" class="btn btn-info" ng-click="resultCtrl.openQuestionModal(question)">Ver questão</button>
+					<small ng-if="false"><a>Sugerir correção</a></small>
+				</td>
+			</tr>
+		</tbody>
+		<tfoot>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><strong>Total:</strong></td>
+				<td><strong>{{resultCtrl.userQuestionaryResult.score}}</strong></td>
+				<td></td>
+			</tr>
+		</tfoot>
+	</table>
+</div>

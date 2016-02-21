@@ -12,7 +12,8 @@
 		var updateTimeSpentPromise;
 
 		vm.userQuestionary;
-		vm.saveUserQuestionary = saveUserQuestionary;
+		vm.saveAndContinue = saveAndContinue;
+		vm.saveAndExit = saveAndExit;
 		
 		init();
 
@@ -28,13 +29,21 @@
 		}
 
 		function updateTimeSpent() {
-			vm.userQuestionary.secondsSpent += 1;
+			vm.userQuestionary.secondsSpent = parseInt(vm.userQuestionary.secondsSpent) + 1;
 			QuestionaryService.updateTimeSpent(vm.userQuestionary.userQuestionaryId, vm.userQuestionary.secondsSpent);
 		}
 
-		function saveUserQuestionary() {
-			QuestionaryService.saveUserQuestionary(vm.userQuestionary).then(function() {
+		function saveAndContinue() {
+			QuestionaryService.saveAndCalculateScore(vm.userQuestionary).then(function() {
 				$state.go('logged.result', {userQuestionaryId : vm.userQuestionary.userQuestionaryId});
+			}, function(){
+				// TODO error message
+			});
+		}
+
+		function saveAndExit() {
+			QuestionaryService.save(vm.userQuestionary).then(function() {
+				$state.go('logged.dashboard');
 			}, function(){
 				// TODO error message
 			});
