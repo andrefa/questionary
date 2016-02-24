@@ -13,8 +13,8 @@ require_once("../dao/ResultDao.php");
             $this->resultDao = new ResultDao();
         }
 
-        public function findUserQuestionaryResult($userQuestionaryId) {
-            return $this->resultDao->findUserQuestionaryResult($userQuestionaryId);
+        public function findUserQuestionaryResult($userId, $userQuestionaryId) {
+            return $this->resultDao->findUserQuestionaryResult($userId, $userQuestionaryId);
         }
 
     }

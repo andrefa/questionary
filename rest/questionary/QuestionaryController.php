@@ -34,7 +34,8 @@ require_once("../service/UserService.php");
             $requestData = json_decode(file_get_contents("php://input"));
 
             $userQuestionary = $this->questionaryService->findUserQuestionary($loggedUserId, $requestData->userQuestionaryId);
-            $this->response(json_encode($userQuestionary),200);
+
+            echo json_encode($userQuestionary);
         }
 
         private function updateTimeSpent() {

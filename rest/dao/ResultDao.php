@@ -7,8 +7,8 @@
             parent::__construct();
         }
 
-        public function findUserQuestionaryResult($userQuestionaryId) {
-        	$sql = " SELECT q.questionary_name, uq.seconds_spent, uq.score FROM user_questionary uq INNER JOIN questionary q ON uq.questionary_id=q.questionary_id where uq.user_questionary_id=$userQuestionaryId ";
+        public function findUserQuestionaryResult($userId, $userQuestionaryId) {
+        	$sql = " SELECT q.questionary_name, uq.seconds_spent, uq.score FROM user_questionary uq INNER JOIN questionary q ON uq.questionary_id=q.questionary_id where uq.user_questionary_id=$userQuestionaryId and uq.user_id = $userId and uq.score is not null ";
             $result =  $this->query($sql);
 			$row = mysql_fetch_object($result);
 
@@ -38,7 +38,7 @@
 				while($row) {
 					$question = new stdClass();
 					$question->questionId = $row->question_id;
-					$question->questionDescription = $row->question_description;
+					$question->questionDescription = utf8_encode($row->question_description);
 					$question->correctOption = $row->correct_option;
 					$question->userOption = $row->user_option;
 					$question->score = $row->score;

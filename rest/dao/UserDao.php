@@ -11,7 +11,7 @@
 			$sql =  " SELECT user_id, full_name FROM user WHERE login = '$loginData->login' and password = '$loginData->password' and active = 1 ";
 			$result =  $this->query($sql);
 			$row = mysql_fetch_object($result);
-
+ 
 			if ($row) {
 				$user = new stdClass();
 				$user->userId = $row->user_id;
@@ -45,11 +45,6 @@
 			$sql = "INSERT INTO user ( full_name,email,login,password,active,creation_date ) VALUES ( '$this->full_name','$this->email','$this->login','$this->password','$this->active','$this->creation_date' )";
 			$result = $this->query($sql);
 			// $this->user_id = mysql_insert_id($this->database->link);
-		}
-
-		public function update($userId) {
-			$sql = " UPDATE user SET  full_name = '$this->full_name',email = '$this->email',login = '$this->login',password = '$this->password',active = '$this->active',creation_date = '$this->creation_date' WHERE user_id = $userId ";
-			$result = $this->query($sql);
 		}
 
 	}

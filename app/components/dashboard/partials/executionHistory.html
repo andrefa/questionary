@@ -15,7 +15,7 @@
 		</thead>
 		<tbody>
 			<tr ng-repeat="execution in dashboardCtrl.executionHistory">
-				<td>{{execution.userQuestionaryId}}</td>
+				<td>{{$index + 1}}</td>
 				<td>{{execution.questionaryName}}</td>
 				<td>{{execution.questionCount}}</td>
 				<td>{{execution.score}}</td>

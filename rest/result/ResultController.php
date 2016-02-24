@@ -30,10 +30,11 @@ require_once("../service/UserService.php");
         }
 
         private function findUserQuestionaryResult() {
+            $loggedUserId = $this->userService->getLoggedUserId($this->getUserSessionToken());
             $requestData = json_decode(file_get_contents("php://input"));
-            $userQuestionaryResult = $this->resultService->findUserQuestionaryResult($requestData->userQuestionaryId);
-            $this->response(json_encode($userQuestionaryResult),200);
-            $this->response('',200);
+
+            $userQuestionaryResult = $this->resultService->findUserQuestionaryResult($loggedUserId, $requestData->userQuestionaryId);
+            echo json_encode($userQuestionaryResult);
         }
         
     }

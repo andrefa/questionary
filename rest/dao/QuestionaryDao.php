@@ -8,12 +8,14 @@
         }
 
         public function findUserQuestionary($userId, $userQuestionaryId) {
-        	$sql = " SELECT uq.user_questionary_id, q.questionary_name, uq.seconds_spent FROM user_questionary uq INNER JOIN questionary q ON uq.questionary_id=q.questionary_id where uq.user_questionary_id=$userQuestionaryId ";
+        	$sql = " SELECT uq.user_questionary_id, q.questionary_name, uq.seconds_spent FROM user_questionary uq INNER JOIN questionary q ON uq.questionary_id=q.questionary_id where uq.user_questionary_id=$userQuestionaryId and uq.user_id=$userId and uq.score is null ";
             $userQuestionaryResult =  $this->query($sql);
 			$userQuestionaryRow = mysql_fetch_object($userQuestionaryResult);
 
-			$userQuestionary = new stdClass();
-			if ($userQuestionaryResult) {
+			$userQuestionary = null;
+			if ($userQuestionaryRow) {
+				$userQuestionary = new stdClass();
+
 				$userQuestionary->userQuestionaryId = $userQuestionaryRow->user_questionary_id;
 				$userQuestionary->questionaryName = $userQuestionaryRow->questionary_name;
 				$userQuestionary->secondsSpent = $userQuestionaryRow->seconds_spent;
@@ -27,7 +29,7 @@
 					$question = new stdClass();
 					$question->userQuestionaryQuestionAnswerId = $questionRow->user_questionary_question_answer_id;
 					$question->questionId = $questionRow->question_id;
-					$question->questionDescription = $questionRow->question_description;
+					$question->questionDescription = utf8_encode($questionRow->question_description);
 					$question->answeredQuestionOptionId = $questionRow->answered_question_option_id;
 					$question->questionOptions = array();
 					$questionId = $questionRow->question_id;
