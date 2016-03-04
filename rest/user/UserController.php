@@ -28,7 +28,7 @@ require_once("../service/UserService.php");
 
             $isUserLogged = $foundUser != null;
             if ($isUserLogged) {
-                setcookie("us", $this->userService->encodeUserId($foundUser->userId), 2592000000, "/");
+                setcookie("us", $this->userService->encodeUserId($foundUser->userId), time() + (3600 * 24 * 30), "/");
             }
 
             $response = new stdClass();
