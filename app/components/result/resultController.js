@@ -6,11 +6,11 @@
 
 	ResultController.$inject = ['$stateParams', '$uibModal','ResultService'];
 	function ResultController($stateParams, $uibModal, ResultService) {
-		
+
 		var vm = this;
 		vm.userQuestionaryResult;
 		vm.openQuestionModal = openQuestionModal;
-		
+
 		init();
 
 		function init() {

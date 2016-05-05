@@ -18,9 +18,9 @@
 				$userQuestionaryResult->secondsSpent = $row->seconds_spent;
 				$userQuestionaryResult->score = $row->score;
 				$userQuestionaryResult->questions = array();
-				
+
 				$sql = " SELECT uqqa.question_id, q.question_description, correctqo.question_option_description correct_option, userqo.question_option_description user_option,
-						( CASE 
+						( CASE
 							WHEN uqqa.answered_question_option_id is null THEN qss.blank_score
 							WHEN uqqa.answered_question_option_id = q.correct_question_option_id THEN qss.correct_score
 							WHEN uqqa.answered_question_option_id <> q.correct_question_option_id THEN qss.wrong_score
@@ -30,7 +30,7 @@
 					inner join question_score_setting qss on q.question_score_setting_id=qss.question_score_setting_id
 					inner join question_option correctqo on q.correct_question_option_id=correctqo.question_option_id
 					left join question_option userqo on uqqa.answered_question_option_id=userqo.question_option_id
-					where user_questionary_id=$userQuestionaryId ";
+					where user_questionary_id=$userQuestionaryId order by uqqa.question_id";
 
 				$result =  $this->query($sql);
 				$row = mysql_fetch_object($result);
@@ -42,7 +42,7 @@
 					$question->correctOption = $row->correct_option;
 					$question->userOption = $row->user_option;
 					$question->score = $row->score;
-					
+
 					array_push($userQuestionaryResult->questions, $question);
 					$row = mysql_fetch_object($result);
 				}
